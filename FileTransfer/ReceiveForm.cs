@@ -43,28 +43,56 @@ namespace FileTransfer
             client = task.Result;
             byte[] tmp = new byte[4];
             client.Client.Receive(tmp, 4, SocketFlags.None);
-            int length = BitConverter.ToInt32(tmp, 0);
-            byte[] fileName = new byte[length];
-            client.Client.Receive(fileName, length, SocketFlags.None);
-            tmp = new byte[4];
-            client.Client.Receive(tmp, 4, SocketFlags.None);
-            length = BitConverter.ToInt32(tmp, 0);
-            byte[] fileData = new byte[length];
-            int received = 0;
-            Invoke(new Action(() => { ReceiveProgressLabel.Text = $"Receiving file of size {Math.Round((double)length / 1024 / 1024, 2)}MB"; }));
-            while (received < length)
+            int total = BitConverter.ToInt32(tmp, 0);
+            TotalProgressBar.Maximum = total;
+            for (int i = 0; i < total; i++)
             {
-                if (isCanceled)
-                    return;
-                int size = bytesToReceive < length - received ? bytesToReceive : length - received;
-                received += client.GetStream().Read(fileData, received, size);
-                int percent = (int)((double)received * 100 / length);
-                BackgroundWorker.ReportProgress(percent);
-            }
+                TotalProgressBar.Value = i;
+                TotalProgressLabel.Text = $"{i}/{total} objects received";
 
-            Invoke(new Action(() => { ReceiveProgressLabel.Text = $"Writing data to file..."; }));
-            File.WriteAllBytes($@"{receiveDir}\{Encoding.ASCII.GetString(fileName)}", fileData);
-            MessageBox.Show("Received successfully.");
+                tmp = new byte[1];
+                client.Client.Receive(tmp, 1, SocketFlags.None);
+                if (tmp[0] == 0x00)     // we are receiving a file
+                {
+                    tmp = new byte[4];
+                    client.Client.Receive(tmp, 4, SocketFlags.None);
+                    int length = BitConverter.ToInt32(tmp, 0);
+
+                    byte[] fileName = new byte[length];
+                    client.Client.Receive(fileName, length, SocketFlags.None);
+
+                    tmp = new byte[4];
+                    client.Client.Receive(tmp, 4, SocketFlags.None);
+                    length = BitConverter.ToInt32(tmp, 0);
+
+                    byte[] fileData = new byte[length];
+                    int received = 0;
+                    Invoke(new Action(() => { ReceiveProgressLabel.Text = $"Receiving file of size {Math.Round((double)length / 1024 / 1024, 2)}MB"; }));
+                    while (received < length)
+                    {
+                        if (isCanceled)
+                            return;
+                        int size = bytesToReceive < length - received ? bytesToReceive : length - received;
+                        received += client.GetStream().Read(fileData, received, size);
+                        int percent = (int)((double)received * 100 / length);
+                        BackgroundWorker.ReportProgress(percent);
+                    }
+
+                    Invoke(new Action(() => { ReceiveProgressLabel.Text = $"Writing data to file..."; }));
+                    File.WriteAllBytes($@"{receiveDir}\{Encoding.ASCII.GetString(fileName)}", fileData);
+                }
+                else                    // we are receiving a directory
+                {
+                    tmp = new byte[4];
+                    client.Client.Receive(tmp, 4, SocketFlags.None);
+                    int length = BitConverter.ToInt32(tmp, 0);
+
+                    byte[] dirName = new byte[length];
+                    client.Client.Receive(dirName, length, SocketFlags.None);
+
+                    Directory.CreateDirectory($@"{receiveDir}\{Encoding.ASCII.GetString(dirName)}");
+                }
+            }
             CloseForm();
         }
 
@@ -90,7 +118,7 @@ namespace FileTransfer
         // updates progressbar when backgroundworker reports progress
         private void ProgressUpdated(object sender, ProgressChangedEventArgs e)
         {
-            ReceiveProgressBar.Value = e.ProgressPercentage;
+            IndividualProgressBar.Value = e.ProgressPercentage;
         }
     }
 }

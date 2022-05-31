@@ -36,32 +36,34 @@ namespace FileTransfer
             this.label3 = new System.Windows.Forms.Label();
             this.RemoteIPTextBox = new System.Windows.Forms.TextBox();
             this.ReceiveButton = new System.Windows.Forms.Button();
-            this.SendPathTextBox = new System.Windows.Forms.TextBox();
             this.ReceivePathTextBox = new System.Windows.Forms.TextBox();
             this.SendButton = new System.Windows.Forms.Button();
             this.NetworkInformationGroupBox = new System.Windows.Forms.GroupBox();
+            this.BytesPerIterationNumUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
             this.SendBrowseButton = new System.Windows.Forms.Button();
             this.ReceiveBrowseButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.FileInformationGroupBox = new System.Windows.Forms.GroupBox();
-            this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.FolderRadioButton = new System.Windows.Forms.RadioButton();
+            this.FilesRadioButton = new System.Windows.Forms.RadioButton();
+            this.FileTreeView = new System.Windows.Forms.TreeView();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.label6 = new System.Windows.Forms.Label();
-            this.BytesPerIterationNumUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.PortNumUpDown)).BeginInit();
             this.NetworkInformationGroupBox.SuspendLayout();
-            this.FileInformationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BytesPerIterationNumUpDown)).BeginInit();
+            this.FileInformationGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // LocalIPTextBox
             // 
-            this.LocalIPTextBox.Location = new System.Drawing.Point(72, 16);
+            this.LocalIPTextBox.Location = new System.Drawing.Point(102, 17);
+            this.LocalIPTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.LocalIPTextBox.Name = "LocalIPTextBox";
             this.LocalIPTextBox.ReadOnly = true;
-            this.LocalIPTextBox.Size = new System.Drawing.Size(104, 20);
+            this.LocalIPTextBox.Size = new System.Drawing.Size(96, 23);
             this.LocalIPTextBox.TabIndex = 1;
             this.LocalIPTextBox.Text = "255.255.255.255";
             this.LocalIPTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -69,24 +71,27 @@ namespace FileTransfer
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 19);
+            this.label1.Location = new System.Drawing.Point(43, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.Size = new System.Drawing.Size(51, 15);
             this.label1.TabIndex = 2;
             this.label1.Text = "Local IP:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 44);
+            this.label2.Location = new System.Drawing.Point(62, 49);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.Size = new System.Drawing.Size(32, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Port:";
             // 
             // PortNumUpDown
             // 
-            this.PortNumUpDown.Location = new System.Drawing.Point(72, 42);
+            this.PortNumUpDown.Location = new System.Drawing.Point(102, 47);
+            this.PortNumUpDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.PortNumUpDown.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -98,7 +103,7 @@ namespace FileTransfer
             0,
             0});
             this.PortNumUpDown.Name = "PortNumUpDown";
-            this.PortNumUpDown.Size = new System.Drawing.Size(104, 20);
+            this.PortNumUpDown.Size = new System.Drawing.Size(96, 23);
             this.PortNumUpDown.TabIndex = 4;
             this.PortNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.PortNumUpDown.Value = new decimal(new int[] {
@@ -110,51 +115,48 @@ namespace FileTransfer
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 71);
+            this.label3.Location = new System.Drawing.Point(30, 80);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.Size = new System.Drawing.Size(64, 15);
             this.label3.TabIndex = 5;
             this.label3.Text = "Remote IP:";
             // 
             // RemoteIPTextBox
             // 
-            this.RemoteIPTextBox.Location = new System.Drawing.Point(72, 68);
+            this.RemoteIPTextBox.Location = new System.Drawing.Point(102, 77);
+            this.RemoteIPTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.RemoteIPTextBox.Name = "RemoteIPTextBox";
-            this.RemoteIPTextBox.Size = new System.Drawing.Size(104, 20);
+            this.RemoteIPTextBox.Size = new System.Drawing.Size(96, 23);
             this.RemoteIPTextBox.TabIndex = 6;
             this.RemoteIPTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // ReceiveButton
             // 
-            this.ReceiveButton.Location = new System.Drawing.Point(354, 93);
+            this.ReceiveButton.Location = new System.Drawing.Point(301, 192);
+            this.ReceiveButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ReceiveButton.Name = "ReceiveButton";
-            this.ReceiveButton.Size = new System.Drawing.Size(75, 23);
+            this.ReceiveButton.Size = new System.Drawing.Size(88, 27);
             this.ReceiveButton.TabIndex = 7;
             this.ReceiveButton.Text = "Receive";
             this.ReceiveButton.UseVisualStyleBackColor = true;
             this.ReceiveButton.Click += new System.EventHandler(this.ButtonClick);
             // 
-            // SendPathTextBox
-            // 
-            this.SendPathTextBox.Location = new System.Drawing.Point(62, 17);
-            this.SendPathTextBox.Name = "SendPathTextBox";
-            this.SendPathTextBox.ReadOnly = true;
-            this.SendPathTextBox.Size = new System.Drawing.Size(180, 20);
-            this.SendPathTextBox.TabIndex = 8;
-            // 
             // ReceivePathTextBox
             // 
-            this.ReceivePathTextBox.Location = new System.Drawing.Point(62, 45);
+            this.ReceivePathTextBox.Location = new System.Drawing.Point(301, 165);
+            this.ReceivePathTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ReceivePathTextBox.Name = "ReceivePathTextBox";
             this.ReceivePathTextBox.ReadOnly = true;
-            this.ReceivePathTextBox.Size = new System.Drawing.Size(180, 20);
+            this.ReceivePathTextBox.Size = new System.Drawing.Size(145, 23);
             this.ReceivePathTextBox.TabIndex = 9;
             // 
             // SendButton
             // 
-            this.SendButton.Location = new System.Drawing.Point(435, 93);
+            this.SendButton.Location = new System.Drawing.Point(419, 192);
+            this.SendButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.SendButton.Name = "SendButton";
-            this.SendButton.Size = new System.Drawing.Size(75, 23);
+            this.SendButton.Size = new System.Drawing.Size(88, 27);
             this.SendButton.TabIndex = 10;
             this.SendButton.Text = "Send";
             this.SendButton.UseVisualStyleBackColor = true;
@@ -170,82 +172,19 @@ namespace FileTransfer
             this.NetworkInformationGroupBox.Controls.Add(this.label1);
             this.NetworkInformationGroupBox.Controls.Add(this.label3);
             this.NetworkInformationGroupBox.Controls.Add(this.RemoteIPTextBox);
-            this.NetworkInformationGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.NetworkInformationGroupBox.Location = new System.Drawing.Point(301, 0);
+            this.NetworkInformationGroupBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.NetworkInformationGroupBox.Name = "NetworkInformationGroupBox";
-            this.NetworkInformationGroupBox.Size = new System.Drawing.Size(185, 122);
+            this.NetworkInformationGroupBox.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.NetworkInformationGroupBox.Size = new System.Drawing.Size(206, 141);
             this.NetworkInformationGroupBox.TabIndex = 11;
             this.NetworkInformationGroupBox.TabStop = false;
             this.NetworkInformationGroupBox.Text = "Network information";
             // 
-            // SendBrowseButton
-            // 
-            this.SendBrowseButton.Location = new System.Drawing.Point(248, 15);
-            this.SendBrowseButton.Name = "SendBrowseButton";
-            this.SendBrowseButton.Size = new System.Drawing.Size(52, 23);
-            this.SendBrowseButton.TabIndex = 12;
-            this.SendBrowseButton.Text = "Browse";
-            this.SendBrowseButton.UseVisualStyleBackColor = true;
-            this.SendBrowseButton.Click += new System.EventHandler(this.ButtonClick);
-            // 
-            // ReceiveBrowseButton
-            // 
-            this.ReceiveBrowseButton.Location = new System.Drawing.Point(248, 43);
-            this.ReceiveBrowseButton.Name = "ReceiveBrowseButton";
-            this.ReceiveBrowseButton.Size = new System.Drawing.Size(52, 23);
-            this.ReceiveBrowseButton.TabIndex = 13;
-            this.ReceiveBrowseButton.Text = "Browse";
-            this.ReceiveBrowseButton.UseVisualStyleBackColor = true;
-            this.ReceiveBrowseButton.Click += new System.EventHandler(this.ButtonClick);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Send:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 48);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Receive:";
-            // 
-            // FileInformationGroupBox
-            // 
-            this.FileInformationGroupBox.Controls.Add(this.label5);
-            this.FileInformationGroupBox.Controls.Add(this.SendPathTextBox);
-            this.FileInformationGroupBox.Controls.Add(this.label4);
-            this.FileInformationGroupBox.Controls.Add(this.ReceivePathTextBox);
-            this.FileInformationGroupBox.Controls.Add(this.ReceiveBrowseButton);
-            this.FileInformationGroupBox.Controls.Add(this.SendBrowseButton);
-            this.FileInformationGroupBox.Location = new System.Drawing.Point(203, 12);
-            this.FileInformationGroupBox.Name = "FileInformationGroupBox";
-            this.FileInformationGroupBox.Size = new System.Drawing.Size(307, 75);
-            this.FileInformationGroupBox.TabIndex = 16;
-            this.FileInformationGroupBox.TabStop = false;
-            this.FileInformationGroupBox.Text = "File information";
-            // 
-            // OpenFileDialog
-            // 
-            this.OpenFileDialog.FileName = "openFileDialog1";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 96);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 13);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "MB received/cycle:";
-            // 
             // BytesPerIterationNumUpDown
             // 
-            this.BytesPerIterationNumUpDown.Location = new System.Drawing.Point(112, 94);
+            this.BytesPerIterationNumUpDown.Location = new System.Drawing.Point(124, 107);
+            this.BytesPerIterationNumUpDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.BytesPerIterationNumUpDown.Maximum = new decimal(new int[] {
             10,
             0,
@@ -257,7 +196,7 @@ namespace FileTransfer
             0,
             0});
             this.BytesPerIterationNumUpDown.Name = "BytesPerIterationNumUpDown";
-            this.BytesPerIterationNumUpDown.Size = new System.Drawing.Size(64, 20);
+            this.BytesPerIterationNumUpDown.Size = new System.Drawing.Size(75, 23);
             this.BytesPerIterationNumUpDown.TabIndex = 8;
             this.BytesPerIterationNumUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.BytesPerIterationNumUpDown.Value = new decimal(new int[] {
@@ -266,26 +205,135 @@ namespace FileTransfer
             0,
             0});
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 109);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(107, 15);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "MB received/cycle:";
+            // 
+            // SendBrowseButton
+            // 
+            this.SendBrowseButton.Location = new System.Drawing.Point(117, 190);
+            this.SendBrowseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.SendBrowseButton.Name = "SendBrowseButton";
+            this.SendBrowseButton.Size = new System.Drawing.Size(51, 23);
+            this.SendBrowseButton.TabIndex = 12;
+            this.SendBrowseButton.Text = "Add...";
+            this.SendBrowseButton.UseVisualStyleBackColor = true;
+            this.SendBrowseButton.Click += new System.EventHandler(this.ButtonClick);
+            // 
+            // ReceiveBrowseButton
+            // 
+            this.ReceiveBrowseButton.Location = new System.Drawing.Point(454, 165);
+            this.ReceiveBrowseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.ReceiveBrowseButton.Name = "ReceiveBrowseButton";
+            this.ReceiveBrowseButton.Size = new System.Drawing.Size(53, 23);
+            this.ReceiveBrowseButton.TabIndex = 13;
+            this.ReceiveBrowseButton.Text = "Browse";
+            this.ReceiveBrowseButton.UseVisualStyleBackColor = true;
+            this.ReceiveBrowseButton.Click += new System.EventHandler(this.ButtonClick);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(301, 144);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 15);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Receive folder:";
+            // 
+            // FileInformationGroupBox
+            // 
+            this.FileInformationGroupBox.Controls.Add(this.RemoveButton);
+            this.FileInformationGroupBox.Controls.Add(this.FolderRadioButton);
+            this.FileInformationGroupBox.Controls.Add(this.FilesRadioButton);
+            this.FileInformationGroupBox.Controls.Add(this.FileTreeView);
+            this.FileInformationGroupBox.Controls.Add(this.SendBrowseButton);
+            this.FileInformationGroupBox.Location = new System.Drawing.Point(3, 0);
+            this.FileInformationGroupBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.FileInformationGroupBox.Name = "FileInformationGroupBox";
+            this.FileInformationGroupBox.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.FileInformationGroupBox.Size = new System.Drawing.Size(290, 219);
+            this.FileInformationGroupBox.TabIndex = 16;
+            this.FileInformationGroupBox.TabStop = false;
+            this.FileInformationGroupBox.Text = "File information";
+            // 
+            // RemoveButton
+            // 
+            this.RemoveButton.Location = new System.Drawing.Point(4, 190);
+            this.RemoveButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(105, 23);
+            this.RemoveButton.TabIndex = 22;
+            this.RemoveButton.Text = "Remove selected";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.ButtonClick);
+            // 
+            // FolderRadioButton
+            // 
+            this.FolderRadioButton.AutoSize = true;
+            this.FolderRadioButton.Location = new System.Drawing.Point(225, 192);
+            this.FolderRadioButton.Name = "FolderRadioButton";
+            this.FolderRadioButton.Size = new System.Drawing.Size(56, 19);
+            this.FolderRadioButton.TabIndex = 19;
+            this.FolderRadioButton.Text = "folder";
+            this.FolderRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // FilesRadioButton
+            // 
+            this.FilesRadioButton.AutoSize = true;
+            this.FilesRadioButton.Checked = true;
+            this.FilesRadioButton.Location = new System.Drawing.Point(175, 192);
+            this.FilesRadioButton.Name = "FilesRadioButton";
+            this.FilesRadioButton.Size = new System.Drawing.Size(46, 19);
+            this.FilesRadioButton.TabIndex = 18;
+            this.FilesRadioButton.TabStop = true;
+            this.FilesRadioButton.Text = "files";
+            this.FilesRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // FileTreeView
+            // 
+            this.FileTreeView.HideSelection = false;
+            this.FileTreeView.Location = new System.Drawing.Point(5, 13);
+            this.FileTreeView.Name = "FileTreeView";
+            this.FileTreeView.Size = new System.Drawing.Size(280, 175);
+            this.FileTreeView.TabIndex = 17;
+            // 
+            // OpenFileDialog
+            // 
+            this.OpenFileDialog.FileName = "openFileDialog1";
+            this.OpenFileDialog.Multiselect = true;
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 141);
+            this.ClientSize = new System.Drawing.Size(510, 223);
             this.Controls.Add(this.FileInformationGroupBox);
             this.Controls.Add(this.NetworkInformationGroupBox);
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.ReceiveButton);
+            this.Controls.Add(this.ReceivePathTextBox);
+            this.Controls.Add(this.ReceiveBrowseButton);
+            this.Controls.Add(this.label5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Send files via TCP";
             ((System.ComponentModel.ISupportInitialize)(this.PortNumUpDown)).EndInit();
             this.NetworkInformationGroupBox.ResumeLayout(false);
             this.NetworkInformationGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BytesPerIterationNumUpDown)).EndInit();
             this.FileInformationGroupBox.ResumeLayout(false);
             this.FileInformationGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BytesPerIterationNumUpDown)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -297,20 +345,21 @@ namespace FileTransfer
         private System.Windows.Forms.TextBox RemoteIPTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button ReceiveButton;
-        private System.Windows.Forms.TextBox SendPathTextBox;
         private System.Windows.Forms.TextBox ReceivePathTextBox;
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.GroupBox NetworkInformationGroupBox;
         private System.Windows.Forms.Button SendBrowseButton;
         private System.Windows.Forms.Button ReceiveBrowseButton;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox FileInformationGroupBox;
-        private System.Windows.Forms.SaveFileDialog SaveFileDialog;
         private System.Windows.Forms.OpenFileDialog OpenFileDialog;
         private System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog;
         private System.Windows.Forms.NumericUpDown BytesPerIterationNumUpDown;
         private System.Windows.Forms.Label label6;
+        private TreeView FileTreeView;
+        private RadioButton FolderRadioButton;
+        private RadioButton FilesRadioButton;
+        private Button RemoveButton;
     }
 }
 

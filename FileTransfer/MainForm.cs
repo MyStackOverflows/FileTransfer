@@ -17,35 +17,60 @@ namespace FileTransfer
     public partial class MainForm : Form
     {
         TcpClient client;
+        int total = 0;
         public MainForm()
         {
             InitializeComponent();
             LocalIPTextBox.Text = GetLocalIP().ToString();
+            ReceivePathTextBox.Text = $@"C:\Users\{Environment.UserName}\Downloads";
         }
 
-        private void SendMessage()
+        // recursive method to loop through all nodes in the FileTreeView and send a message for each one
+        private void SendAll(TreeNodeCollection nodes)
         {
-            // msg[0] is the file name length of x bytes. next x bytes is the file name. msg[x + 1] is the file length of y bytes. next y bytes is the file data
-            // creating msg
-            FileInfo f = new FileInfo(SendPathTextBox.Text);
+            foreach (TreeNode node in nodes)
+            {
+                SendMessage(node.Tag.ToString(), node.FullPath);
+                if (node.Nodes.Count > 0)
+                    SendAll(node.Nodes);
+            }
+        }
 
-            byte[] msg = new byte[f.Length + f.Name.Length + 12];
-            long i = 0;
-            Array.Copy(BitConverter.GetBytes(f.Name.Length), 0, msg, i, 4);
-            i += 4;
-            Array.Copy(Encoding.ASCII.GetBytes(f.Name), 0, msg, i, f.Name.Length);
-            i += f.Name.Length;
-            Array.Copy(BitConverter.GetBytes((int)f.Length), 0, msg, i, 4);
-            i += 4;
-            Array.Copy(File.ReadAllBytes(f.FullName), 0, msg, i, f.Length);
-            i += f.Length;
+        // sends the individual messages
+        private void SendMessage(string path, string final)
+        {
+            byte[] msg;
+            if (File.Exists(path))
+            {
+                FileInfo info = new FileInfo(path);
+                msg = new byte[info.Length + final.Length + 9];
+                msg[0] = 0x00;      // 0x00 means file, 0x01 means directory
 
+                // first byte = file/dir indicator, next 4 bytes = name length x, next x bytes is name, next 4 bytes = file size in bytes y, next y bytes = file
+                long i = 1;
+                Array.Copy(BitConverter.GetBytes(final.Length), 0, msg, i, 4); i += 4;
+                Array.Copy(Encoding.ASCII.GetBytes(final), 0, msg, i, final.Length); i += final.Length;
+                Array.Copy(BitConverter.GetBytes((int)info.Length), 0, msg, i, 4); i += 4;
+                Array.Copy(File.ReadAllBytes(info.FullName), 0, msg, i, info.Length);
+            }
+            else if (Directory.Exists(path))
+            {
+                DirectoryInfo info = new DirectoryInfo(path);
+                msg = new byte[final.Length + 5];
+                msg[0] = 0x01;      // 0x00 means file, 0x01 means directory
+
+                // first byte = file/dir indicator, next 4 bytes = name length x, next x bytes is name
+                Array.Copy(BitConverter.GetBytes(final.Length), 0, msg, 1, 4);
+                Array.Copy(Encoding.ASCII.GetBytes(final), 0, msg, 5, final.Length);
+            }
+            else
+            {
+                // invalid path
+                MessageBox.Show($"The path specified ({path}) is not valid. Skipping this file.");
+                return;
+            }
             // sending msg
             client.Client.Send(msg, msg.Length, SocketFlags.None);
-
-            // clean up
-            client.Close();
-            client = null;
         }
 
         private void ButtonClick(object sender, EventArgs e)
@@ -53,9 +78,39 @@ namespace FileTransfer
             string name = ((Button)sender).Name;
             if (name.Equals("SendBrowseButton"))
             {
-                DialogResult res = OpenFileDialog.ShowDialog();
-                if (res == DialogResult.OK)
-                    SendPathTextBox.Text = OpenFileDialog.FileName;
+                // select and add files
+                if (FilesRadioButton.Checked)
+                {
+                    DialogResult res = OpenFileDialog.ShowDialog();
+                    if (res == DialogResult.OK)
+                    {
+                        for (int i = 0; i < OpenFileDialog.FileNames.Length; i++)
+                        {
+                            TreeNode node = FileTreeView.Nodes.Add(OpenFileDialog.SafeFileNames[i]);    // node.Text = file name
+                            node.Tag = OpenFileDialog.FileNames[i];                                     // node.Tag = full file path
+                            total++;
+                        }
+                    }
+                }
+                // select and add a folder
+                else
+                {
+                    DialogResult res = FolderBrowserDialog.ShowDialog();
+                    if (res == DialogResult.OK)
+                    {
+                        DirectoryInfo dir = new DirectoryInfo(FolderBrowserDialog.SelectedPath);
+                        TreeNode node = FileTreeView.Nodes.Add(dir.Name);
+                        node.Tag = dir.FullName;
+                        AddDirectory(dir, node);
+                        total++;
+                    }
+                }
+            }
+            else if (name.Equals("RemoveButton"))
+            {
+                TreeNode node = FileTreeView.SelectedNode;
+                total -= (node.GetNodeCount(true) + 1);
+                node.Remove();
             }
             else if (name.Equals("ReceiveBrowseButton"))
             {
@@ -65,25 +120,54 @@ namespace FileTransfer
             }
             else if (name.Equals("SendButton"))
             {
-                if (SendPathTextBox.Text.Equals(""))
-                    PrintDebug("No file was specified to send, operation canceled.", "Error");
+                if (FileTreeView.Nodes.Count == 0)
+                    PrintDebug("No files were specified to send, operation canceled.", "Error");
                 else
                 {
                     client = GetClient();
                     if (client == null)
                         PrintDebug("Invalid IP format or IP was not open, operation canceled.", "Error");
                     else
-                        SendMessage();
+                    {
+                        // send initial message to let the receiver know how many individual messages are following
+                        byte[] msg = new byte[4];
+                        Array.Copy(BitConverter.GetBytes(total), 0, msg, 0, 4);
+                        client.Client.Send(msg, msg.Length, SocketFlags.None);
+
+                        // send a message for every node in FileTreeView
+                        SendAll(FileTreeView.Nodes);
+
+                        client.Close();
+                        client = null;
+                    }
                 }
             }
             else if (name.Equals("ReceiveButton"))
             {
-                if (ReceivePathTextBox.Text.Equals(""))
-                    PrintDebug("No folder was specified to receive, operation canceled.", "Error");
+                if (!Directory.Exists(ReceivePathTextBox.Text))
+                    PrintDebug("The directory specified for receiving does not exist, operation canceled.", "Error");
                 else
                 {
                     new ReceiveForm(ReceivePathTextBox.Text, (int)PortNumUpDown.Value, (int)BytesPerIterationNumUpDown.Value * 1024 * 1024).ShowDialog();
                 }
+            }
+        }
+
+        // recursive method to add a directory and all subfiles and directories to the file treeview
+        private void AddDirectory(DirectoryInfo dir, TreeNode parent)
+        {
+            foreach (DirectoryInfo child in dir.GetDirectories())
+            {
+                TreeNode node = parent.Nodes.Add(child.Name);
+                node.Tag = child.FullName;
+                AddDirectory(child, node);
+                total++;
+            }
+            foreach (FileInfo file in dir.GetFiles())
+            {
+                TreeNode node = parent.Nodes.Add(file.Name);
+                node.Tag = file.FullName;
+                total++;
             }
         }
 
