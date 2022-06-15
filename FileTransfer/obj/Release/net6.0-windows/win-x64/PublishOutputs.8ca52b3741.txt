@@ -1,0 +1,2 @@
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\bin\Release\net6.0-windows\publish\win-x64\FileTransfer.pdb
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\bin\Release\net6.0-windows\publish\win-x64\FileTransfer.exe

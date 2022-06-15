@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using System.Diagnostics;
 
 namespace FileTransfer
 {
@@ -134,6 +135,20 @@ namespace FileTransfer
                         Array.Copy(BitConverter.GetBytes(total), 0, msg, 0, 4);
                         client.Client.Send(msg, msg.Length, SocketFlags.None);
 
+                        // send another initial message to let the receiver know the total number of bytes coming (so total progress bar can be accurate)
+                        long totalBytes = 0;
+                        foreach (TreeNode node in FileTreeView.Nodes)   // calculate total size of all files and directories including sub-directories
+                        {
+                            string path = node.Tag.ToString();
+                            if (File.Exists(path))
+                                totalBytes += new FileInfo(path).Length;        // add size of file to totalBytes
+                            else if (Directory.Exists(path))
+                                totalBytes += new DirectoryInfo(path).GetFiles("*.*", SearchOption.AllDirectories).Sum(f => f.Length);    // add size of all files and sub-files to totalBytes
+                        }
+                        msg = new byte[4];
+                        Array.Copy(BitConverter.GetBytes((int)totalBytes), 0, msg, 0, 4);
+                        client.Client.Send(msg, msg.Length, SocketFlags.None);
+
                         // send a message for every node in FileTreeView
                         SendAll(FileTreeView.Nodes);
 
@@ -150,6 +165,15 @@ namespace FileTransfer
                 {
                     new ReceiveForm(ReceivePathTextBox.Text, (int)PortNumUpDown.Value, (int)BytesPerIterationNumUpDown.Value * 1024 * 1024).ShowDialog();
                 }
+            }
+            else if (name.Equals("OpenReceiveFolderButton"))
+            {
+                ProcessStartInfo info = new ProcessStartInfo();
+                info.FileName = "explorer.exe";
+                info.Arguments = $"{ReceivePathTextBox.Text}";
+                Process p = new Process();
+                p.StartInfo = info;
+                p.Start();
             }
         }
 

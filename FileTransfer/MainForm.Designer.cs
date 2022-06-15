@@ -51,6 +51,7 @@ namespace FileTransfer
             this.FileTreeView = new System.Windows.Forms.TreeView();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.OpenReceiveFolderButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PortNumUpDown)).BeginInit();
             this.NetworkInformationGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BytesPerIterationNumUpDown)).BeginInit();
@@ -309,11 +310,22 @@ namespace FileTransfer
             this.OpenFileDialog.FileName = "openFileDialog1";
             this.OpenFileDialog.Multiselect = true;
             // 
+            // OpenReceiveFolderButton
+            // 
+            this.OpenReceiveFolderButton.Location = new System.Drawing.Point(454, 141);
+            this.OpenReceiveFolderButton.Name = "OpenReceiveFolderButton";
+            this.OpenReceiveFolderButton.Size = new System.Drawing.Size(53, 23);
+            this.OpenReceiveFolderButton.TabIndex = 17;
+            this.OpenReceiveFolderButton.Text = "Open";
+            this.OpenReceiveFolderButton.UseVisualStyleBackColor = true;
+            this.OpenReceiveFolderButton.Click += new System.EventHandler(this.ButtonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 223);
+            this.Controls.Add(this.OpenReceiveFolderButton);
             this.Controls.Add(this.FileInformationGroupBox);
             this.Controls.Add(this.NetworkInformationGroupBox);
             this.Controls.Add(this.SendButton);
@@ -360,6 +372,7 @@ namespace FileTransfer
         private RadioButton FolderRadioButton;
         private RadioButton FilesRadioButton;
         private Button RemoveButton;
+        private Button OpenReceiveFolderButton;
     }
 }
 

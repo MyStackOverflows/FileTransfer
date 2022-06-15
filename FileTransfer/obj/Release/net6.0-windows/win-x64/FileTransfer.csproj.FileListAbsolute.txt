@@ -34,3 +34,21 @@ D:\Code\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\refint\File
 D:\Code\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.pdb
 D:\Code\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.genruntimeconfig.cache
 D:\Code\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\ref\FileTransfer.dll
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\bin\Release\net6.0-windows\win-x64\FileTransfer.exe
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\bin\Release\net6.0-windows\win-x64\FileTransfer.deps.json
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\bin\Release\net6.0-windows\win-x64\FileTransfer.runtimeconfig.json
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\bin\Release\net6.0-windows\win-x64\FileTransfer.dll
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\bin\Release\net6.0-windows\win-x64\FileTransfer.pdb
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.csproj.AssemblyReference.cache
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.MainForm.resources
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.ReceiveForm.resources
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.csproj.GenerateResource.cache
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.AssemblyInfoInputs.cache
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.AssemblyInfo.cs
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.csproj.CoreCompileInputs.cache
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.dll
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\refint\FileTransfer.dll
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.pdb
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\FileTransfer.genruntimeconfig.cache
+D:\Code\GitHub Projects\FileTransfer\FileTransfer\obj\Release\net6.0-windows\win-x64\ref\FileTransfer.dll

@@ -16,4 +16,4 @@ build_property.EnableSingleFileAnalyzer = true
 build_property.EnableTrimAnalyzer = 
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = FileTransfer
-build_property.ProjectDir = D:\Code\FileTransfer\FileTransfer\
+build_property.ProjectDir = D:\Code\GitHub Projects\FileTransfer\FileTransfer\

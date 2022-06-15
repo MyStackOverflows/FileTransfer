@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\FileTransfer\\FileTransfer\\FileTransfer.csproj": {}
+    "D:\\Code\\GitHub Projects\\FileTransfer\\FileTransfer\\FileTransfer.csproj": {}
   },
   "projects": {
-    "D:\\Code\\FileTransfer\\FileTransfer\\FileTransfer.csproj": {
+    "D:\\Code\\GitHub Projects\\FileTransfer\\FileTransfer\\FileTransfer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\FileTransfer\\FileTransfer\\FileTransfer.csproj",
+        "projectUniqueName": "D:\\Code\\GitHub Projects\\FileTransfer\\FileTransfer\\FileTransfer.csproj",
         "projectName": "FileTransfer",
-        "projectPath": "D:\\Code\\FileTransfer\\FileTransfer\\FileTransfer.csproj",
+        "projectPath": "D:\\Code\\GitHub Projects\\FileTransfer\\FileTransfer\\FileTransfer.csproj",
         "packagesPath": "C:\\Users\\Paul\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\FileTransfer\\FileTransfer\\obj\\",
+        "outputPath": "D:\\Code\\GitHub Projects\\FileTransfer\\FileTransfer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Paul\\AppData\\Roaming\\NuGet\\NuGet.Config",

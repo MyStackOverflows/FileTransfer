@@ -85,9 +85,9 @@ namespace FileTransfer
             this.TotalProgressLabel.AutoSize = true;
             this.TotalProgressLabel.Location = new System.Drawing.Point(13, 51);
             this.TotalProgressLabel.Name = "TotalProgressLabel";
-            this.TotalProgressLabel.Size = new System.Drawing.Size(114, 15);
+            this.TotalProgressLabel.Size = new System.Drawing.Size(105, 15);
             this.TotalProgressLabel.TabIndex = 4;
-            this.TotalProgressLabel.Text = "0 / x files transferred";
+            this.TotalProgressLabel.Text = "0/x MB transferred";
             // 
             // ReceiveForm
             // 
