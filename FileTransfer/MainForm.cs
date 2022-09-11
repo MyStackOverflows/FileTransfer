@@ -96,9 +96,16 @@ namespace FileTransfer
             }
             else if (name.Equals("RemoveButton"))
             {
-                TreeNode node = FileTreeView.SelectedNode;
-                total -= (node.GetNodeCount(true) + 1);
-                node.Remove();
+                try
+                {
+                    TreeNode node = FileTreeView.SelectedNode;
+                    total -= (node.GetNodeCount(true) + 1);
+                    node.Remove();
+                }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("You need to select a node before you can remove it.");
+                }
             }
             else if (name.Equals("ReceiveBrowseButton"))
             {
