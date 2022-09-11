@@ -84,27 +84,14 @@ namespace FileTransfer
                 {
                     DialogResult res = OpenFileDialog.ShowDialog();
                     if (res == DialogResult.OK)
-                    {
-                        for (int i = 0; i < OpenFileDialog.FileNames.Length; i++)
-                        {
-                            TreeNode node = FileTreeView.Nodes.Add(OpenFileDialog.SafeFileNames[i]);    // node.Text = file name
-                            node.Tag = OpenFileDialog.FileNames[i];                                     // node.Tag = full file path
-                            total++;
-                        }
-                    }
+                        AddGeneric(OpenFileDialog.FileNames);
                 }
                 // select and add a folder
                 else
                 {
                     DialogResult res = FolderBrowserDialog.ShowDialog();
                     if (res == DialogResult.OK)
-                    {
-                        DirectoryInfo dir = new DirectoryInfo(FolderBrowserDialog.SelectedPath);
-                        TreeNode node = FileTreeView.Nodes.Add(dir.Name);
-                        node.Tag = dir.FullName;
-                        AddDirectory(dir, node);
-                        total++;
-                    }
+                        AddGeneric(new string[] { FolderBrowserDialog.SelectedPath });
                 }
             }
             else if (name.Equals("RemoveButton"))
@@ -177,6 +164,29 @@ namespace FileTransfer
             }
         }
 
+        // method to parse file/folder paths and add the items to the node tree of the treeview
+        private void AddGeneric(string[] paths)
+        {
+            foreach (string path in paths)
+            {
+                if (File.Exists(path))
+                {
+                    FileInfo file = new FileInfo(path);
+                    TreeNode node = FileTreeView.Nodes.Add(file.Name);      // node.Text = file name
+                    node.Tag = file.FullName;                               // node.Tag = full file path
+                    total++;
+                }
+                else if (Directory.Exists(path))
+                {
+                    DirectoryInfo dir = new DirectoryInfo(path);
+                    TreeNode node = FileTreeView.Nodes.Add(dir.Name);
+                    node.Tag = dir.FullName;
+                    AddDirectory(dir, node);
+                    total++;
+                }
+            }
+        }
+
         // recursive method to add a directory and all subfiles and directories to the file treeview
         private void AddDirectory(DirectoryInfo dir, TreeNode parent)
         {
@@ -215,5 +225,43 @@ namespace FileTransfer
         {
             MessageBox.Show(msg, title);
         }
+
+        #region drag/drop methods
+        private void FileTreeView_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                AddGeneric((string[])e.Data.GetData(DataFormats.FileDrop));
+            }
+        }
+
+        private void FileTreeView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+        #endregion
+
+        #region cursor snapping for changing remote ip textbox
+        private void RemoteIPTextBox_Enter(object sender, EventArgs e)
+        {
+            if (RemoteIPTextBox.Text.Equals("192.168.1."))
+            {
+                RemoteIPTextBox.SelectionStart = 10;    // index directly after the last '.'
+                RemoteIPTextBox.SelectionLength = 0;
+            }
+        }
+
+        private void RemoteIPTextBox_Click(object sender, EventArgs e)
+        {
+            if (RemoteIPTextBox.Text.Equals("192.168.1."))
+            {
+                RemoteIPTextBox.SelectionStart = 10;    // index directly after the last '.'
+                RemoteIPTextBox.SelectionLength = 0;
+            }
+        }
+        #endregion
     }
 }

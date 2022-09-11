@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bt+TWAH7YNl2yRBr2BqpLRc4A5l/KQYoXaE9OIyiDEfLEyfBwk8+rXXiYFibGEyRZKOoYBgbVrcXoURNZEoiGQ==",
+  "dgSpecHash": "pyAOAbahRF3DFqTIoupZwGHfQIFykK8D6GQoqVPJQt99T87NFR1ypcIXdp/Dq6Wrakj7SmmLstQU+mZgr7hDGw==",
   "success": true,
-  "projectFilePath": "D:\\Code\\GitHub Projects\\FileTransfer\\FileTransfer\\FileTransfer.csproj",
+  "projectFilePath": "D:\\Code\\FileTransfer\\FileTransfer\\FileTransfer.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

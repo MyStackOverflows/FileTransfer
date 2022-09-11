@@ -130,7 +130,10 @@ namespace FileTransfer
             this.RemoteIPTextBox.Name = "RemoteIPTextBox";
             this.RemoteIPTextBox.Size = new System.Drawing.Size(96, 23);
             this.RemoteIPTextBox.TabIndex = 6;
+            this.RemoteIPTextBox.Text = "192.168.1.";
             this.RemoteIPTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.RemoteIPTextBox.Click += new System.EventHandler(this.RemoteIPTextBox_Click);
+            this.RemoteIPTextBox.Enter += new System.EventHandler(this.RemoteIPTextBox_Enter);
             // 
             // ReceiveButton
             // 
@@ -299,11 +302,14 @@ namespace FileTransfer
             // 
             // FileTreeView
             // 
+            this.FileTreeView.AllowDrop = true;
             this.FileTreeView.HideSelection = false;
             this.FileTreeView.Location = new System.Drawing.Point(5, 13);
             this.FileTreeView.Name = "FileTreeView";
             this.FileTreeView.Size = new System.Drawing.Size(280, 175);
             this.FileTreeView.TabIndex = 17;
+            this.FileTreeView.DragDrop += new System.Windows.Forms.DragEventHandler(this.FileTreeView_DragDrop);
+            this.FileTreeView.DragEnter += new System.Windows.Forms.DragEventHandler(this.FileTreeView_DragEnter);
             // 
             // OpenFileDialog
             // 
